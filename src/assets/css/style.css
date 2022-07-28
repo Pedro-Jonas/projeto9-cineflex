@@ -14,6 +14,9 @@ div{
     font-size: 34px;
     line-height: 40px;
     color: #E8833A;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .message{
@@ -25,4 +28,7 @@ div{
     font-size: 24px;
     line-height: 28px;
     color: #293845;
+    position: fixed;
+    top: 67px;
+    left: 0;
 }
