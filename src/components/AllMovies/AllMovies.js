@@ -1,20 +1,21 @@
 import "./style.css";
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import Message from "../Message/Message";
 
 export default function AllMovies(){
     const [filmes, setFilmes] = useState([]);
     useEffect(()=> {
-        const get = axios.get("https://mock-api.driven.com.br/api/v5/cineflex/movies");
-        get.then(respost => {setFilmes(respost.data)})
+        const promise = axios.get("https://mock-api.driven.com.br/api/v7/cineflex/movies");
+        promise.then(respost => {setFilmes(respost.data)})
 
     }, []);
     return(
     <>
     <Message text="Selecione o filme"/>
     <div className="posters">
-		{filmes.map(item => <div key={item.id} className="poster"><img src={item.posterURL} alt="poster"/></div>)}
+		{filmes.map(item => <Link key={item.id} to={`/sessoes/${item.id}`}><div className="poster"><img src={item.posterURL} alt="poster"/></div></Link>)}
 	</div>
     </>
     );
