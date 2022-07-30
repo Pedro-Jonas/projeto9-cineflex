@@ -1,0 +1,45 @@
+.seats{
+    width: 375px;
+    margin-top: 178px;
+    margin-bottom: 16px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 18px;
+    column-gap: 7px;
+    padding: 0 10px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+}
+.seat{
+    width: 26px;
+    height: 26px;
+    border-radius: 50px;
+}
+
+.informacao{
+    flex-direction: row;
+    column-gap: 75px;
+}
+.descricao{
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 15px;
+    color: #4E5A65;
+    flex-direction: row;
+    margin-top: 5px;
+    column-gap: 38px;
+}
+
+.selecionado{
+    background-color: #8DD7CF;
+}
+.disponivel{
+    background-color: #C3CFD9;
+}
+
+.indisponivel{
+    background-color: #FBE192;
+}
