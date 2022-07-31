@@ -17,7 +17,6 @@ function Top(){
 
 export default function App(){
     return(
-    //mudar o nome das rotas
     <>
     <BrowserRouter>
         <Top/>

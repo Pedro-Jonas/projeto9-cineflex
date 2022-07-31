@@ -1,9 +1,13 @@
 import Message from "../Message/Message";
 import Footer from '../Footer/Footer';
-import { useParams} from 'react-router-dom';
+import Form from "../Form/Form";
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import "./style.css"
+
+const ids = [];
+const names = [];
 
 export default function Seats(){
     const {idSessao}= useParams();
@@ -23,16 +27,28 @@ export default function Seats(){
     setDay(respost.data.day)
     });
     }, [idSessao]);
+    function check(id, name){
+        let have = false;
+        for(let i=0; i<ids.length; i++){
+            if (id === ids[i]){
+                have = true;
+            }
+        }
+        if (!have){
+            ids.push(id);
+            names.push(name);
+        }
+    }
 
     return(
     <>
     <Message text="Selecione o(s) assento(s)"/>
     <div className="seats">
         {seats.map((seat)=> {
-        const avaliable = seat.isAvailable
+        const avaliable = seat.isAvailable;
         return(
         avaliable?
-        (<div key={seat.id} className="seat disponivel">
+        (<div key={seat.id} className={`seat disponivel`} onClick={()=> check(seat.id, seat.name)}>
             {seat.name}
         </div>) : 
         (<div key={seat.id} className="seat indisponivel">
@@ -50,6 +66,7 @@ export default function Seats(){
        <p>disponível</p> 
        <p>indisponível</p> 
     </div>
+    <Form ids={ids} names={names} title={movie.title} day={day.weekday} time={data.name}/>
     <Footer url={movie.posterURL} title={movie.title} day={day.weekday} time={data.name}/>
     </>
     );
