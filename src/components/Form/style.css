@@ -12,6 +12,7 @@ form{
 .name{
     width: 100%;
     align-items: flex-start;
+    margin-bottom: 5px;
 }
 
 .inputs input{
@@ -26,6 +27,7 @@ form{
     font-size: 18px;
     line-height: 21px;
     color: #AFAFAF;
+    margin-bottom: 5px;
 }
 
 button{

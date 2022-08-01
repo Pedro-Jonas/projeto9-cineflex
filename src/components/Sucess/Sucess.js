@@ -1,10 +1,15 @@
 import Message from "../Message/Message";
 import "./style.css";
-import { Link, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Sucess(){
     const location = useLocation();
     const data = location.state;
+    const navigate = useNavigate();
+
+    function home(){
+        navigate("/");
+    }
     return(
     <>
     <div className="sucess">
@@ -29,11 +34,9 @@ export default function Sucess(){
             <h1>CPF: {data.info.cpf}</h1>
         </div>
         <div className="home">
-            <Link to={"/"}>
-            <div className="button-home">
+            <div className="button-home" onClick={home}>
                 Voltar pra Home
             </div>
-            </Link>
         </div>
     </div>
     </>

@@ -3,7 +3,6 @@ import {useNavigate } from "react-router-dom";
 import "./style.css"
 import axios from "axios";
 
-
 export default function Form(props){
     const [name, setName] = useState("");
     const [cpf, setCpf] = useState("");

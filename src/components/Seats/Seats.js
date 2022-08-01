@@ -6,13 +6,16 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import "./style.css"
 
-const ids = [];
-const names = [];
+let ids = [];
+let names = [];
+let selected = [];
+
 
 export default function Seats(){
     const {idSessao}= useParams();
     const [data, setData] = useState([]);
     const [seats, setSeats] = useState([]);
+    const [render, setRender] = useState(false);
     const [movie, setMovie] = useState([]);
     const [day, setDay] = useState([]);
 
@@ -27,11 +30,26 @@ export default function Seats(){
     setDay(respost.data.day)
     });
     }, [idSessao]);
-    function check(id, name){
+
+    useEffect(()=>{
+    ids = [];
+    names = [];
+    selected = [];
+    }, [])
+
+    function check(id, name, seat){
+        for(let i=0; i<selected.length; i++){
+            if (seat === selected[i]){
+                selected.splice(i, 1, {id: seat.id, name: seat.name, isAvailable: seat.isAvailable, cliked: !seat.cliked})
+                setRender(!render)
+            }
+        }
         let have = false;
         for(let i=0; i<ids.length; i++){
             if (id === ids[i]){
                 have = true;
+                ids.splice(i, 1);
+                names.splice(i, 1);
             }
         }
         if (!have){
@@ -40,17 +58,23 @@ export default function Seats(){
         }
     }
 
+    if (selected.length === 0){
+        seats.map((seat)=> selected.push({id: seat.id, name: seat.name, isAvailable: seat.isAvailable, cliked: false}) )
+    }
     return(
     <>
     <Message text="Selecione o(s) assento(s)"/>
     <div className="seats">
-        {seats.map((seat)=> {
+        {selected.map((seat)=> {
         const avaliable = seat.isAvailable;
+        const cliked = seat.cliked;
         return(
         avaliable?
-        (<div key={seat.id} className={`seat disponivel`} onClick={()=> check(seat.id, seat.name)}>
+        (cliked? (<div key={seat.id} className={`seat selecionado`} onClick={()=> check(seat.id, seat.name, seat)}>
+        {seat.name}
+    </div>):(<div key={seat.id} className={`seat disponivel`} onClick={()=> check(seat.id, seat.name, seat)}>
             {seat.name}
-        </div>) : 
+        </div>)) : 
         (<div key={seat.id} className="seat indisponivel">
             {seat.name}
         </div>)
